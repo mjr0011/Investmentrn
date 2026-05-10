@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>NexTrade Capital — Smart Investing, Effortless Returns</title>
+<meta name="description" content="NexTrade Capital is a professional trading and investment platform offering mirror trading, stocks, futures and managed crypto plans with 24/7 expert support." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- Top Ticker -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker__track" id="tickerTrack"></div>
+</div>
+
+<!-- Header -->
+<header class="header" id="header">
+  <div class="container header__inner">
+    <a href="#" class="logo">
+      <span class="logo__mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="14 7 21 7 21 14"/></svg>
+      </span>
+      <span class="logo__text">NexTrade</span>
+    </a>
+
+    <nav class="nav" id="nav">
+      <a href="#about">About</a>
+      <a href="#mirror">Mirror Trading</a>
+      <a href="#stocks">Stocks</a>
+      <a href="#plans">Investment Plans</a>
+    </nav>
+
+    <div class="header__cta">
+      <a href="login.html" class="btn btn--ghost">Login</a>
+      <a href="signup.html" class="btn btn--primary">Open Account</a>
+    </div>
+
+    <button class="burger" id="burger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero__bg" aria-hidden="true">
+    <div class="orb orb--1"></div>
+    <div class="orb orb--2"></div>
+    <div class="grid"></div>
+  </div>
+  <div class="container hero__inner">
+    <div class="hero__copy">
+      <span class="pill"><span class="dot"></span> Live markets · Trusted by 1M+ traders</span>
+      <h1>
+        Profitability<br/>
+        <span class="grad">on the rise.</span>
+      </h1>
+      <p class="lead">A next‑generation trading platform engineered to support your financial goals — with mirror trading, expert signals and 24/7 portfolio support.</p>
+      <div class="hero__actions">
+        <a href="#plans" class="btn btn--primary btn--lg">Start Investing →</a>
+        <a href="#about" class="btn btn--outline btn--lg">How it works</a>
+      </div>
+      <div class="hero__trust">
+        <div><strong>$211M+</strong><span>Monthly turnover</span></div>
+        <div><strong>1M+</strong><span>Active traders</span></div>
+        <div><strong>130+</strong><span>Countries</span></div>
+      </div>
+    </div>
+
+    <div class="hero__card">
+      <div class="card-glow"></div>
+      <div class="trade-card">
+        <div class="trade-card__head">
+          <div>
+            <div class="muted">Portfolio Value</div>
+            <div class="trade-card__value">$48,920.<span class="muted">14</span></div>
+          </div>
+          <span class="badge badge--up">▲ 12.84%</span>
+        </div>
+        <svg class="spark" viewBox="0 0 300 110" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="g" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stop-color="#22e6b8" stop-opacity=".55"/>
+              <stop offset="100%" stop-color="#22e6b8" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <path d="M0,80 L20,72 L40,78 L60,60 L80,66 L100,52 L120,58 L140,42 L160,48 L180,32 L200,38 L220,24 L240,30 L260,18 L280,22 L300,10 L300,110 L0,110 Z" fill="url(#g)"/>
+          <path d="M0,80 L20,72 L40,78 L60,60 L80,66 L100,52 L120,58 L140,42 L160,48 L180,32 L200,38 L220,24 L240,30 L260,18 L280,22 L300,10" fill="none" stroke="#22e6b8" stroke-width="2"/>
+        </svg>
+        <div class="trade-card__rows">
+          <div class="row"><span><i class="dot dot--btc"></i>BTC/USD</span><span class="mono">$77,641</span><span class="up">+0.23%</span></div>
+          <div class="row"><span><i class="dot dot--eth"></i>ETH/USD</span><span class="mono">$2,318.9</span><span class="up">+0.13%</span></div>
+          <div class="row"><span><i class="dot dot--xrp"></i>XRP/USD</span><span class="mono">$1.4342</span><span class="up">+0.03%</span></div>
+          <div class="row"><span><i class="dot dot--trx"></i>TRX/USD</span><span class="mono">$0.3246</span><span class="down">-1.41%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="section__head">
+      <span class="eyebrow">About us</span>
+      <h2>Take action with a global trading partner you can trust.</h2>
+      <p>NexTrade Capital combines proper support, constant education and a measured approach so trading works for you. From educational tools and demo accounts to 24/7 customer success, our platform is built to remain at the forefront of online investing.</p>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-img">
+        <div class="about-img__inner">
+          <div class="about-img__shine"></div>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><strong>130+</strong><span>Countries supported</span></div>
+        <div class="stat"><strong>1M+</strong><span>Trader accounts</span></div>
+        <div class="stat"><strong>30M+</strong><span>Monthly transactions</span></div>
+        <div class="stat"><strong>$16M+</strong><span>Avg. monthly payout</span></div>
+        <div class="stat stat--wide"><strong>$211M+</strong><span>Monthly trade turnover</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Mirror Trading -->
+<section class="section section--alt" id="mirror">
+  <div class="container">
+    <div class="section__head">
+      <span class="eyebrow">Mirror trading</span>
+      <h2>Copy proven strategies. Trade like a pro from day one.</h2>
+    </div>
+    <div class="cards">
+      <article class="feature">
+        <div class="feature__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5"/><path d="M8 21H3v-5"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg>
+        </div>
+        <h3>Copy option trading</h3>
+        <p>Mirror the moves of more experienced traders — manually, semi‑automatically or fully automated — straight to your account.</p>
+      </article>
+      <article class="feature">
+        <div class="feature__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-6"/></svg>
+        </div>
+        <h3>Advanced trading</h3>
+        <p>From simple moving‑average crossovers to fully programmed strategies — execute with precision on professional infrastructure.</p>
+      </article>
+      <article class="feature">
+        <div class="feature__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9 9h4.5a2.5 2.5 0 010 5H9V8m0 6v3m3-12v2m0 12v2"/></svg>
+        </div>
+        <h3>Crypto currency market</h3>
+        <p>Position your portfolio for the next decade of digital assets with research‑backed allocation and signals.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Investment Plans -->
+<section class="section" id="plans">
+  <div class="container">
+    <div class="section__head">
+      <span class="eyebrow">Investment plans</span>
+      <h2>Pick a plan engineered for your level of capital.</h2>
+    </div>
+
+    <div class="plans">
+      <article class="plan">
+        <header><h3>Standard</h3><p>For getting started</p></header>
+        <div class="plan__price"><span>5×</span> risk‑free trade</div>
+        <ul>
+          <li>Minimum: <b>$1,000</b></li>
+          <li>Maximum: <b>$20,000</b></li>
+          <li>Expert signals</li>
+          <li>24/7 active support</li>
+        </ul>
+        <a href="#" class="btn btn--outline btn--block">Get started</a>
+      </article>
+
+      <article class="plan plan--featured">
+        <span class="ribbon">Most popular</span>
+        <header><h3>Premium</h3><p>For serious investors</p></header>
+        <div class="plan__price"><span>10×</span> risk‑free trade</div>
+        <ul>
+          <li>Minimum: <b>$20,000</b></li>
+          <li>Maximum: <b>$200,000</b></li>
+          <li>Premium signals</li>
+          <li>24/7 priority support</li>
+        </ul>
+        <a href="#" class="btn btn--primary btn--block">Get started</a>
+      </article>
+
+      <article class="plan">
+        <header><h3>Corporate</h3><p>For institutions</p></header>
+        <div class="plan__price"><span>15×</span> risk‑free trade</div>
+        <ul>
+          <li>Minimum: <b>$200,000</b></li>
+          <li>Maximum: <b>Unlimited</b></li>
+          <li>Platinum signals</li>
+          <li>Dedicated account manager</li>
+        </ul>
+        <a href="#" class="btn btn--outline btn--block">Get started</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Stocks -->
+<section class="section section--alt" id="stocks">
+  <div class="container">
+    <div class="section__head">
+      <span class="eyebrow">Stocks & assets</span>
+      <h2>Trade the world's most liquid markets.</h2>
+    </div>
+    <div class="cards cards--4">
+      <article class="feature feature--sm">
+        <div class="feature__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12s4-7 9-7 9 7 9 7-4 7-9 7-9-7-9-7z"/><circle cx="12" cy="12" r="3"/></svg></div>
+        <h3>Swing trading</h3>
+        <p>Capture short to medium‑term moves over days or weeks using technical analysis.</p>
+      </article>
+      <article class="feature feature--sm">
+        <div class="feature__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M7 13l3 3 7-7"/></svg></div>
+        <h3>Futures</h3>
+        <p>Take leveraged positions on indices, commodities and even Bitcoin with full transparency.</p>
+      </article>
+      <article class="feature feature--sm">
+        <div class="feature__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/></svg></div>
+        <h3>Options</h3>
+        <p>Hedge or speculate with calls and puts on the highest‑volume names on the market.</p>
+      </article>
+      <article class="feature feature--sm">
+        <div class="feature__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2s6 7 6 12a6 6 0 11-12 0c0-5 6-12 6-12z"/></svg></div>
+        <h3>Oil & Gas</h3>
+        <p>Diversify into energy with curated exposure to the biggest commodity markets.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Pro -->
+<section class="section">
+  <div class="container pro">
+    <div class="pro__copy">
+      <span class="eyebrow">Become a pro trader</span>
+      <h2>A reliable platform is the foundation of every successful trader.</h2>
+      <p>International reputation, unwavering reliability, constant support and unique tools — these qualities are combined in the award‑winning NexTrade Capital electronic trading platform.</p>
+      <p>Trading will bring you profit with proper support, constant education and a reasonable approach. Our team works tirelessly to keep you ahead.</p>
+      <a href="signup.html" class="btn btn--primary btn--lg">Create free account</a>
+    </div>
+    <div class="pro__visual">
+      <div class="pro__panel">
+        <div class="pro__row"><span>EUR/USD</span><span class="mono up">1.0942 ▲</span></div>
+        <div class="pro__row"><span>S&P 500</span><span class="mono up">7,163.5 ▲</span></div>
+        <div class="pro__row"><span>NASDAQ 100</span><span class="mono up">27,297 ▲</span></div>
+        <div class="pro__row"><span>BTC</span><span class="mono up">77,641 ▲</span></div>
+        <div class="pro__row"><span>ETH</span><span class="mono up">2,318.9 ▲</span></div>
+        <div class="pro__row"><span>XAU/USD</span><span class="mono down">2,318.9 ▼</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container footer__inner">
+    <div>
+      <a href="#" class="logo">
+        <span class="logo__mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="14 7 21 7 21 14"/></svg></span>
+        <span class="logo__text">Apex<span>Trade</span></span>
+      </a>
+      <p class="muted small">© 2025 NexTrade Capital. All rights reserved.</p>
+    </div>
+    <div class="footer__cols">
+      <div>
+        <h4>Contact</h4>
+        <p class="small">support@Nextrade.capital</p>
+        <p class="small">+1 402 317 6645</p>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <a href="#about" class="small">About</a>
+        <a href="#plans" class="small">Plans</a>
+        <a href="#stocks" class="small">Markets</a>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <a href="#" class="small">Risk Disclosure</a>
+        <a href="#" class="small">Service Agreement</a>
+      </div>
+    </div>
+  </div>
+  <div class="container disclaimer small">
+    Transactions offered by this Website can be executed only by fully competent adults. Trading financial instruments involves substantial risk; you may incur substantial losses or even lose everything in your account. Review the Service Agreement and Risk Disclosure before you begin.
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

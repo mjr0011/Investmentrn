@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Dashboard — NexTrade Capital</title>
+<meta name="description" content="NexTrade Capital investor dashboard — invest BTC, track history, manage your wallet and get 24/7 support." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="dashboard.css" />
+</head>
+<body class="dash-body">
+
+<div class="dash-bg" aria-hidden="true">
+  <div class="orb orb--1"></div>
+  <div class="orb orb--2"></div>
+  <div class="grid"></div>
+</div>
+
+<!-- Mobile scrim -->
+<div class="scrim" id="scrim" hidden></div>
+
+<!-- Sidebar -->
+<aside class="sidebar" id="sidebar">
+  <a href="index.html" class="logo">
+    <span class="logo__mark">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="14 7 21 7 21 14"/></svg>
+    </span>
+    <span class="logo__text">NexTrade</span>
+  </a>
+
+  <nav class="side-nav" id="sideNav">
+    <a href="#overview" class="active" data-view="overview">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+      Overview
+    </a>
+    <a href="#invest" data-view="invest">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      Invest
+    </a>
+    <a href="#history" data-view="history">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      History
+    </a>
+    <a href="#wallet" data-view="wallet">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12V7a2 2 0 0 0-2-2H5a2 2 0 0 0 0 4h16v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7"/><circle cx="17" cy="13" r="1.2"/></svg>
+      Wallet
+    </a>
+    <a href="#support" data-view="support">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 1 1 5.8 1c0 2-3 2-3 4"/><line x1="12" y1="17" x2="12" y2="17.01"/></svg>
+      Support
+    </a>
+  </nav>
+
+  <div class="side-foot">
+    <div class="user-mini">
+      <div class="avatar" id="avatarSmall">A</div>
+      <div class="user-mini__txt">
+        <div class="user-mini__n" id="userName">Investor</div>
+        <div class="user-mini__e muted" id="userEmail"></div>
+      </div>
+    </div>
+    <button class="btn btn--ghost btn--sm" id="logoutBtn">Logout</button>
+  </div>
+</aside>
+
+<!-- Main -->
+<main class="dash-main">
+  <!-- Topbar -->
+  <header class="topbar">
+    <button class="burger" id="burgerDash" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    <div class="topbar__title">
+      <h1 id="viewTitle">Welcome back, <span class="grad" id="userGreeting">Investor</span></h1>
+      <p class="muted" id="viewSub">Here's a snapshot of your portfolio today.</p>
+    </div>
+    <div class="topbar__actions">
+      <div class="btc-price" title="Live BTC price">
+        <span class="dot"></span> BTC <b id="btcPriceTop">$77,641</b>
+        <span class="up" id="btcChangeTop">+0.23%</span>
+      </div>
+      <button class="btn btn--primary" id="quickDeposit"><span class="hide-sm">+ Deposit</span><span class="show-sm">+</span></button>
+    </div>
+  </header>
+
+  <!-- ========== OVERVIEW VIEW ========== -->
+  <section class="view" data-view="overview">
+    <div class="kpis">
+      <div class="kpi kpi--hero">
+        <div class="kpi__label">Portfolio Value</div>
+        <div class="kpi__value mono" id="kpiPortfolio">$0.00</div>
+        <div class="kpi__sub up" id="kpiPortfolioPct">+0.00% all-time</div>
+        <svg class="kpi__spark" viewBox="0 0 100 30" preserveAspectRatio="none"><polyline fill="none" stroke="url(#g1)" stroke-width="2" points="0,22 10,18 20,20 30,14 40,16 50,10 60,12 70,7 80,9 90,4 100,6"/><defs><linearGradient id="g1" x1="0" x2="1"><stop offset="0%" stop-color="#22e6b8"/><stop offset="100%" stop-color="#22d3ff"/></linearGradient></defs></svg>
+      </div>
+      <div class="kpi">
+        <div class="kpi__label">BTC Holdings</div>
+        <div class="kpi__value mono" id="kpiBtc">0.00000000</div>
+        <div class="kpi__sub muted">Bitcoin</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi__label">Total Invested</div>
+        <div class="kpi__value mono" id="kpiInvested">$0.00</div>
+        <div class="kpi__sub muted" id="kpiDeposits">0 deposits</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi__label">Profit / Loss</div>
+        <div class="kpi__value mono" id="kpiPnl">+$0.00</div>
+        <div class="kpi__sub up" id="kpiPnlPct">+0.00%</div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="panel">
+        <div class="panel__head">
+          <div>
+            <h3>Portfolio performance</h3>
+            <p class="muted small">Live tracking</p>
+          </div>
+          <div class="seg">
+            <button class="active" data-range="24h">24H</button>
+            <button data-range="7d">7D</button>
+            <button data-range="30d">30D</button>
+          </div>
+        </div>
+        <canvas id="perfChart" height="220"></canvas>
+      </div>
+
+      <div class="panel">
+        <h3>Quick actions</h3>
+        <div class="qa">
+          <button class="qa__item" id="qaDeposit">
+            <span class="qa__ic">↓</span>
+            <div><b>Deposit Bitcoin</b><div class="muted small">Add funds via BTC</div></div>
+          </button>
+          <button class="qa__item" data-go="invest">
+            <span class="qa__ic">＋</span>
+            <div><b>New investment</b><div class="muted small">Pick a plan</div></div>
+          </button>
+          <button class="qa__item" data-go="wallet">
+            <span class="qa__ic">⟳</span>
+            <div><b>Wallet</b><div class="muted small">Manage funds</div></div>
+          </button>
+          <button class="qa__item" data-go="support">
+            <span class="qa__ic">?</span>
+            <div><b>Need help?</b><div class="muted small">24/7 support</div></div>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <section class="panel">
+      <div class="panel__head">
+        <div>
+          <h3>Active investments</h3>
+          <p class="muted small">Live progress of your funded plans</p>
+        </div>
+        <span class="badge" id="activeCount">0 active</span>
+      </div>
+      <div class="invs" id="investmentsList"></div>
+    </section>
+  </section>
+
+  <!-- ========== INVEST VIEW ========== -->
+  <section class="view" data-view="invest" hidden>
+    <div class="invest-hero panel">
+      <div>
+        <span class="badge">📈 Trusted by 12,400+ investors</span>
+        <h2 class="invest-hero__h">Grow your Bitcoin with managed plans</h2>
+        <p class="muted">Choose a plan, fund it with BTC, and let our trading desk compound your returns. Withdraw anytime after the cycle ends.</p>
+        <div class="invest-hero__stats">
+          <div><b class="mono grad">$184M</b><span class="muted small">Assets under management</span></div>
+          <div><b class="mono grad">99.98%</b><span class="muted small">Payout reliability</span></div>
+          <div><b class="mono grad">24/7</b><span class="muted small">Trading desk</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="plan-grid">
+      <article class="plan-card">
+        <div class="plan-card__h"><b>Starter</b><span class="muted small">Low risk</span></div>
+        <div class="plan-card__roi grad mono">+12%</div>
+        <div class="muted small">in 14 days</div>
+        <ul class="plan-card__list">
+          <li>✓ $50 – $999</li>
+          <li>✓ Daily reporting</li>
+          <li>✓ Capital protected</li>
+          <li>✓ Email support</li>
+        </ul>
+        <button class="btn btn--ghost btn--block" data-invest="starter">Invest now</button>
+      </article>
+      <article class="plan-card plan-card--feat">
+        <span class="plan-card__tag">Most popular</span>
+        <div class="plan-card__h"><b>Pro</b><span class="muted small">Medium risk</span></div>
+        <div class="plan-card__roi grad mono">+28%</div>
+        <div class="muted small">in 21 days</div>
+        <ul class="plan-card__list">
+          <li>✓ $1,000 – $9,999</li>
+          <li>✓ Priority execution</li>
+          <li>✓ Auto-compound</li>
+          <li>✓ Live chat support</li>
+        </ul>
+        <button class="btn btn--primary btn--block" data-invest="pro">Invest now</button>
+      </article>
+      <article class="plan-card">
+        <div class="plan-card__h"><b>Elite</b><span class="muted small">Managed</span></div>
+        <div class="plan-card__roi grad mono">+55%</div>
+        <div class="muted small">in 30 days</div>
+        <ul class="plan-card__list">
+          <li>✓ $10,000+</li>
+          <li>✓ Dedicated manager</li>
+          <li>✓ Hedging strategies</li>
+          <li>✓ Phone support</li>
+        </ul>
+        <button class="btn btn--ghost btn--block" data-invest="elite">Invest now</button>
+      </article>
+    </div>
+
+    <div class="panel">
+      <h3>How it works</h3>
+      <div class="steps">
+        <div class="step-item"><span class="step-item__n">1</span><div><b>Pick a plan</b><p class="muted small">Choose Starter, Pro or Elite based on your goals.</p></div></div>
+        <div class="step-item"><span class="step-item__n">2</span><div><b>Send Bitcoin</b><p class="muted small">Pay the quoted BTC to your unique deposit address.</p></div></div>
+        <div class="step-item"><span class="step-item__n">3</span><div><b>Track returns</b><p class="muted small">Watch your portfolio grow live in the Overview tab.</p></div></div>
+        <div class="step-item"><span class="step-item__n">4</span><div><b>Withdraw</b><p class="muted small">Cash out principal + profit at the end of the cycle.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== HISTORY VIEW ========== -->
+  <section class="view" data-view="history" hidden>
+    <div class="hist-stats">
+      <div class="kpi"><div class="kpi__label">Total deposits</div><div class="kpi__value mono" id="hsCount">0</div><div class="kpi__sub muted">All time</div></div>
+      <div class="kpi"><div class="kpi__label">Confirmed</div><div class="kpi__value mono up" id="hsConfirmed">0</div><div class="kpi__sub muted">Cleared on-chain</div></div>
+      <div class="kpi"><div class="kpi__label">Pending</div><div class="kpi__value mono" id="hsPending" style="color:var(--warn)">0</div><div class="kpi__sub muted">Awaiting confirmations</div></div>
+      <div class="kpi"><div class="kpi__label">Total volume</div><div class="kpi__value mono" id="hsVolume">$0.00</div><div class="kpi__sub muted">USD invested</div></div>
+    </div>
+
+    <section class="panel">
+      <div class="panel__head">
+        <div><h3>Deposit history</h3><p class="muted small">Every BTC payment to your account</p></div>
+        <div class="seg" id="histFilter">
+          <button class="active" data-f="all">All</button>
+          <button data-f="confirmed">Confirmed</button>
+          <button data-f="pending">Pending</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="dtable">
+          <thead><tr><th>Date</th><th>Amount</th><th>BTC</th><th>Plan</th><th>TX</th><th>Status</th></tr></thead>
+          <tbody id="historyBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </section>
+
+  <!-- ========== WALLET VIEW ========== -->
+  <section class="view" data-view="wallet" hidden>
+    <div class="wallet-grid">
+      <div class="panel wallet-balance">
+        <div class="muted small">Available balance</div>
+        <div class="wallet-balance__usd mono" id="walUsd">$0.00</div>
+        <div class="wallet-balance__btc mono grad" id="walBtc">0.00000000 BTC</div>
+        <div class="wallet-actions">
+          <button class="btn btn--primary" id="walDeposit">↓ Deposit</button>
+          <button class="btn btn--ghost" id="walWithdraw">↑ Withdraw</button>
+        </div>
+        <div class="wallet-meta">
+          <div><span class="muted small">BTC price</span><b class="mono" id="walPrice">$77,641</b></div>
+          <div><span class="muted small">24h change</span><b class="up">+2.34%</b></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Your BTC deposit address</h3>
+        <p class="muted small">Use this address for all Bitcoin deposits. It's permanently linked to your account.</p>
+        <div class="addr-block">
+          <div class="addr-qr" id="walQr"></div>
+          <div class="addr-side">
+            <div class="input-wrap">
+              <input type="text" id="walAddress" readonly />
+              <button class="copy" id="walCopy">Copy</button>
+            </div>
+            <div class="warn">⚠ Send <b>only Bitcoin (BTC)</b> on the Bitcoin network. Other coins will be lost.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel" style="grid-column:1/-1">
+        <div class="panel__head">
+          <div><h3>Withdraw funds</h3><p class="muted small">Withdrawals are processed within 24h after the investment cycle ends.</p></div>
+          <span class="badge" style="background:rgba(255,181,71,.12);color:var(--warn);border-color:rgba(255,181,71,.3)">KYC required for >$5,000</span>
+        </div>
+        <form class="withdraw-form" id="withdrawForm">
+          <label class="field"><span>Withdrawal amount (USD)</span>
+            <div class="input-wrap"><span class="input-pre">$</span><input type="number" id="wdAmount" placeholder="0.00" min="20"/></div>
+          </label>
+          <label class="field"><span>BTC address</span>
+            <div class="input-wrap"><input type="text" id="wdAddress" placeholder="bc1q…"/></div>
+          </label>
+          <button class="btn btn--primary btn--block" type="submit">Request withdrawal</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SUPPORT VIEW ========== -->
+  <section class="view" data-view="support" hidden>
+    <div class="support-grid">
+      <a class="sup-card" href="mailto:support@apextrade.capital">
+        <div class="sup-card__ic">✉</div>
+        <b>Email support</b>
+        <p class="muted small">support@apextrade.capital · replies in &lt; 1h</p>
+      </a>
+      <a class="sup-card" href="#" id="liveChatBtn">
+        <div class="sup-card__ic">💬</div>
+        <b>Live chat</b>
+        <p class="muted small">Talk to a real human, 24/7</p>
+      </a>
+      <a class="sup-card" href="tel:+18005550199">
+        <div class="sup-card__ic">📞</div>
+        <b>Phone</b>
+        <p class="muted small">+1 (800) 555‑0199</p>
+      </a>
+    </div>
+
+    <div class="grid-2">
+      <div class="panel">
+        <h3>Send us a message</h3>
+        <form class="contact-form" id="contactForm">
+          <label class="field"><span>Subject</span>
+            <div class="input-wrap"><input type="text" id="cfSubject" required placeholder="How can we help?"/></div>
+          </label>
+          <label class="field"><span>Message</span>
+            <textarea id="cfMessage" rows="6" required placeholder="Describe your issue in detail…"></textarea>
+          </label>
+          <button class="btn btn--primary btn--block" type="submit">Submit ticket</button>
+        </form>
+      </div>
+
+      <div class="panel">
+        <h3>Frequently asked</h3>
+        <div class="faq">
+          <details><summary>How long until my deposit confirms?</summary><p class="muted small">Bitcoin deposits typically clear within 10–30 minutes after 1 network confirmation.</p></details>
+          <details><summary>When can I withdraw my profits?</summary><p class="muted small">At the end of your investment cycle (14, 21 or 30 days). You can also re-invest automatically.</p></details>
+          <details><summary>Is my capital safe?</summary><p class="muted small">Funds are held in cold storage with multi-sig. We carry $50M in custodian insurance.</p></details>
+          <details><summary>Are there hidden fees?</summary><p class="muted small">No. The advertised ROI is net of all fees.</p></details>
+          <details><summary>Do I need to verify my identity?</summary><p class="muted small">KYC is only required for withdrawals above $5,000.</p></details>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Deposit Modal -->
+<div class="modal" id="depositModal" aria-hidden="true">
+  <div class="modal__backdrop" data-close></div>
+  <div class="modal__card" role="dialog" aria-modal="true">
+    <button class="modal__x" data-close aria-label="Close">×</button>
+
+    <div class="step" data-step="1">
+      <h2>Invest with Bitcoin</h2>
+      <p class="muted">Step 1 of 2 — choose plan and amount</p>
+
+      <div class="plans">
+        <label class="plan-pick">
+          <input type="radio" name="plan" value="starter" checked>
+          <div class="plan-pick__body">
+            <div class="plan-pick__top"><b>Starter</b><span class="grad mono">+12% / 14d</span></div>
+            <div class="muted small">$50 – $999 · Low risk</div>
+          </div>
+        </label>
+        <label class="plan-pick">
+          <input type="radio" name="plan" value="pro">
+          <div class="plan-pick__body">
+            <div class="plan-pick__top"><b>Pro</b><span class="grad mono">+28% / 21d</span></div>
+            <div class="muted small">$1,000 – $9,999 · Medium risk</div>
+          </div>
+        </label>
+        <label class="plan-pick">
+          <input type="radio" name="plan" value="elite">
+          <div class="plan-pick__body">
+            <div class="plan-pick__top"><b>Elite</b><span class="grad mono">+55% / 30d</span></div>
+            <div class="muted small">$10,000+ · Managed</div>
+          </div>
+        </label>
+      </div>
+
+      <label class="field">
+        <span>Investment amount (USD)</span>
+        <div class="input-wrap">
+          <span class="input-pre">$</span>
+          <input type="number" id="amountInput" min="50" placeholder="500" value="500"/>
+        </div>
+      </label>
+      <div class="presets">
+        <button data-preset="100">$100</button>
+        <button data-preset="500">$500</button>
+        <button data-preset="1000">$1,000</button>
+        <button data-preset="5000">$5,000</button>
+        <button data-preset="10000">$10,000</button>
+      </div>
+
+      <div class="quote">
+        <div><span class="muted small">You'll send</span><div class="mono grad" id="quoteBtc">0.00644000 BTC</div></div>
+        <div><span class="muted small">BTC price</span><div class="mono" id="quotePrice">$77,641</div></div>
+      </div>
+
+      <button class="btn btn--primary btn--block" id="toStep2">Continue →</button>
+    </div>
+
+    <div class="step" data-step="2" hidden>
+      <h2>Send Bitcoin</h2>
+      <p class="muted">Step 2 of 2 — send the exact amount to the address below</p>
+
+      <div class="qr-box"><div class="qr" id="qrBox"></div></div>
+
+      <label class="field">
+        <span>BTC Deposit Address</span>
+        <div class="input-wrap">
+          <input type="text" id="btcAddress" readonly />
+          <button class="copy" id="copyBtn" type="button">Copy</button>
+        </div>
+      </label>
+
+      <div class="quote">
+        <div><span class="muted small">Amount</span><div class="mono" id="confAmount">$500</div></div>
+        <div><span class="muted small">BTC</span><div class="mono grad" id="confBtc">0.00644000</div></div>
+      </div>
+
+      <label class="field">
+        <span>Transaction hash <span class="muted small">(optional, speeds up confirmation)</span></span>
+        <div class="input-wrap"><input type="text" id="txHash" placeholder="Paste your TX ID"/></div>
+      </label>
+
+      <div class="warn">⚠ Send <b>only BTC</b> on the Bitcoin network. Confirmations typically take 10–30 minutes.</div>
+
+      <div class="row gap">
+        <button class="btn btn--ghost" id="backStep1">← Back</button>
+        <button class="btn btn--primary" id="confirmDeposit">I've sent the payment</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Notifications -->
+<button class="bell" id="bellBtn" aria-label="Notifications">🔔<span class="bell__badge" id="bellBadge" hidden>0</span></button>
+<div class="notif-panel" id="notifPanel" hidden>
+  <div class="notif-panel__head"><b>Notifications</b><button id="clearNotifs" class="link small">Clear all</button></div>
+  <div id="notifList" class="notif-list"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script src="dashboard.js"></script>
+</body>
+</html>

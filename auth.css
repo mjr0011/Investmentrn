@@ -1,0 +1,156 @@
+/* ApexTrade — Auth Pages (Login / Signup) */
+
+.auth-body { min-height: 100vh; overflow-x: hidden; position: relative; }
+
+/* Background */
+.auth-bg { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+.auth-bg .orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: .55; }
+.auth-bg .orb--1 { width: 520px; height: 520px;
+  background: radial-gradient(circle, #22e6b8, transparent 60%);
+  top: -160px; left: -120px;
+  animation: float 14s ease-in-out infinite;
+}
+.auth-bg .orb--2 { width: 560px; height: 560px;
+  background: radial-gradient(circle, #7c5cff, transparent 60%);
+  bottom: -180px; right: -160px; opacity: .45;
+  animation: float 18s ease-in-out infinite reverse;
+}
+@keyframes float {
+  0%,100% { transform: translate(0,0); }
+  50% { transform: translate(40px,-30px); }
+}
+.auth-bg .grid { position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at 50% 30%, #000 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 30%, #000 30%, transparent 75%);
+}
+
+/* Layout */
+.auth-shell {
+  min-height: 100vh;
+  display: grid; grid-template-columns: 1.05fr 1fr;
+  max-width: 1400px; margin: 0 auto;
+}
+
+/* Side panel */
+.auth-side {
+  padding: 36px 56px 48px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  gap: 40px; border-right: 1px solid var(--border);
+}
+.auth-side__content { max-width: 480px; }
+.eyebrow {
+  display: inline-block; font-size: .72rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .14em;
+  color: var(--primary); margin-bottom: 12px;
+}
+.auth-side__content h2 {
+  font-size: clamp(2rem, 3.4vw, 2.7rem);
+  line-height: 1.08; letter-spacing: -.02em; font-weight: 800; margin-bottom: 14px;
+}
+.auth-side__content > p { font-size: 1rem; color: var(--muted); margin-bottom: 28px; }
+
+.auth-bullets { list-style: none; display: grid; gap: 12px; margin-bottom: 32px; }
+.auth-bullets li { display: flex; align-items: center; gap: 12px; font-size: .95rem; }
+.auth-bullets .check {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: rgba(34,230,184,.14); color: var(--primary);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: .78rem; border: 1px solid rgba(34,230,184,.35); flex-shrink: 0;
+}
+
+.stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 28px; }
+.stat-mini {
+  padding: 16px; border: 1px solid var(--border); border-radius: 12px;
+  background: rgba(14,22,34,.5); backdrop-filter: blur(8px);
+}
+.stat-mini__v { font-size: 1.4rem; font-weight: 700; letter-spacing: -.02em; }
+.stat-mini__l { font-size: .78rem; color: var(--muted); margin-top: 2px; }
+
+.auth-quote {
+  padding: 16px 18px; border-left: 3px solid var(--primary);
+  background: rgba(34,230,184,.06); border-radius: 0 10px 10px 0;
+}
+.auth-quote p { font-style: italic; font-size: .95rem; }
+.auth-quote__by { font-size: .8rem; color: var(--muted); margin-top: 8px; }
+
+/* Form panel */
+.auth-card {
+  padding: 56px clamp(28px, 5vw, 72px);
+  display: flex; flex-direction: column; justify-content: center;
+  background: rgba(7, 16, 28, 0.4);
+}
+.auth-card__head { margin-bottom: 28px; }
+.auth-card__head h1 {
+  font-size: 1.85rem; font-weight: 800; letter-spacing: -.02em; margin-bottom: 6px;
+}
+.auth-card__head p { color: var(--muted); font-size: .95rem; }
+.link { color: var(--primary); font-weight: 600; }
+.link:hover { text-decoration: underline; }
+
+.divider {
+  display: flex; align-items: center; gap: 14px;
+  margin: 8px 0 22px; color: var(--muted);
+  font-size: .72rem; text-transform: uppercase; letter-spacing: .14em;
+}
+.divider::before, .divider::after {
+  content: ""; flex: 1; height: 1px; background: var(--border);
+}
+
+/* Form */
+.auth-form { display: grid; gap: 16px; }
+.field { display: grid; gap: 8px; }
+.field--row { grid-template-columns: 1fr 1fr; gap: 14px; }
+.field--row .field { display: grid; gap: 8px; }
+.field label { font-size: .85rem; font-weight: 600; }
+.field input {
+  width: 100%; padding: 13px 14px; border-radius: 10px;
+  border: 1px solid var(--border);
+  background: rgba(11, 23, 38, 0.6);
+  color: var(--text); font-size: .95rem; font-family: inherit;
+  transition: border-color .15s, box-shadow .15s;
+}
+.field input:focus {
+  outline: none; border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(34, 230, 184, 0.15);
+}
+.field input::placeholder { color: #4f637b; }
+
+.password-wrap { position: relative; }
+.password-toggle {
+  position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+  background: transparent; color: var(--muted); padding: 6px; border-radius: 6px;
+  font-size: .8rem; font-weight: 600;
+}
+.password-toggle:hover { color: var(--primary); }
+
+.strength { display: flex; align-items: center; gap: 10px; margin-top: 4px; }
+.strength__bar {
+  flex: 1; height: 5px; border-radius: 99px;
+  background: rgba(255,255,255,.08); overflow: hidden;
+}
+.strength__fill { height: 100%; width: 0; transition: width .25s, background .25s; }
+.strength__label { font-size: .75rem; color: var(--muted); white-space: nowrap; }
+
+.checkbox { display: flex; align-items: flex-start; gap: 10px; font-size: .88rem; color: var(--muted); cursor: pointer; }
+.checkbox input { width: 16px; height: 16px; margin-top: 3px; accent-color: var(--primary); }
+
+.error-msg { color: var(--danger); font-size: .85rem; min-height: 18px; }
+
+.legal { font-size: .75rem; color: var(--muted); text-align: center; margin-top: 4px; line-height: 1.5; }
+
+/* Responsive */
+@media (max-width: 960px) {
+  .auth-shell { grid-template-columns: 1fr; }
+  .auth-side { display: none; }
+  .auth-card { padding: 36px 22px; min-height: 100vh; }
+}
+@media (max-width: 480px) {
+  .field--row { grid-template-columns: 1fr; }
+  .auth-card__head h1 { font-size: 1.55rem; }
+  .toast-host { left: 12px; right: 12px; top: 12px; }
+  .toast-msg { min-width: 0; max-width: 100%; }
+}
