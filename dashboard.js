@@ -376,33 +376,65 @@
     const c = $("perfChart"); if (!c) return;
     const ctx = c.getContext("2d");
     const dpr = window.devicePixelRatio || 1;
-    const w = c.clientWidth, h = c.clientHeight || 220;
-    if (!w) return;
-    c.width = w * dpr; c.height = h * dpr; ctx.setTransform(1,0,0,1,0,0); ctx.scale(dpr, dpr);
+    const parent = c.parentElement;
+    const w = (parent && parent.clientWidth) || c.clientWidth;
+    const h = (parent && parent.clientHeight) || c.clientHeight || 220;
+    if (!w || !h) return;
+    c.width = w * dpr; c.height = h * dpr;
+    c.style.width = w + "px"; c.style.height = h + "px";
+    ctx.setTransform(1,0,0,1,0,0); ctx.scale(dpr, dpr);
+    ctx.clearRect(0, 0, w, h);
 
-    const pts = 60, data = []; let v = 50 + Math.random() * 20;
+    const padX = 4, padTop = 12, padBot = 10;
+    const pts = w < 480 ? 40 : 60, data = []; let v = 50 + Math.random() * 20;
     for (let i = 0; i < pts; i++) { v += (Math.random() - 0.45) * 6 + 0.4; data.push(Math.max(20, v)); }
     const max = Math.max(...data), min = Math.min(...data);
-    const xStep = w / (pts - 1);
-    const y = (val) => h - ((val - min) / (max - min || 1)) * (h - 20) - 10;
+    const xStep = (w - padX * 2) / (pts - 1);
+    const x = (i) => padX + i * xStep;
+    const y = (val) => h - padBot - ((val - min) / (max - min || 1)) * (h - padTop - padBot);
 
-    ctx.strokeStyle = "rgba(255,255,255,.05)";
-    for (let i = 0; i < 4; i++) { const yy = (h/4)*i + 10; ctx.beginPath(); ctx.moveTo(0, yy); ctx.lineTo(w, yy); ctx.stroke(); }
+    ctx.strokeStyle = "rgba(255,255,255,.05)"; ctx.lineWidth = 1;
+    const rows = 4;
+    for (let i = 0; i <= rows; i++) {
+      const yy = padTop + ((h - padTop - padBot) / rows) * i;
+      ctx.beginPath(); ctx.moveTo(0, yy); ctx.lineTo(w, yy); ctx.stroke();
+    }
 
     const grad = ctx.createLinearGradient(0, 0, 0, h);
     grad.addColorStop(0, "rgba(34,230,184,.35)"); grad.addColorStop(1, "rgba(34,230,184,0)");
-    ctx.fillStyle = grad; ctx.beginPath(); ctx.moveTo(0, h);
-    data.forEach((d, i) => ctx.lineTo(i * xStep, y(d)));
-    ctx.lineTo(w, h); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = grad; ctx.beginPath(); ctx.moveTo(x(0), h - padBot);
+    data.forEach((d, i) => ctx.lineTo(x(i), y(d)));
+    ctx.lineTo(x(pts - 1), h - padBot); ctx.closePath(); ctx.fill();
 
     const lg = ctx.createLinearGradient(0, 0, w, 0);
     lg.addColorStop(0, "#22e6b8"); lg.addColorStop(1, "#22d3ff");
-    ctx.strokeStyle = lg; ctx.lineWidth = 2.4; ctx.lineJoin = "round";
+    ctx.strokeStyle = lg; ctx.lineWidth = w < 480 ? 2 : 2.4;
+    ctx.lineJoin = "round"; ctx.lineCap = "round";
     ctx.beginPath();
-    data.forEach((d, i) => i === 0 ? ctx.moveTo(0, y(d)) : ctx.lineTo(i * xStep, y(d)));
+    data.forEach((d, i) => i === 0 ? ctx.moveTo(x(i), y(d)) : ctx.lineTo(x(i), y(d)));
     ctx.stroke();
+
+    const lastX = x(pts - 1), lastY = y(data[pts - 1]);
+    ctx.fillStyle = "rgba(34,230,184,.18)";
+    ctx.beginPath(); ctx.arc(lastX, lastY, 8, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = "#22e6b8";
+    ctx.beginPath(); ctx.arc(lastX, lastY, 3.5, 0, Math.PI * 2); ctx.fill();
   }
-  window.addEventListener("resize", () => { drawChart(); });
+  let _chartT;
+  const _redraw = () => { clearTimeout(_chartT); _chartT = setTimeout(drawChart, 80); };
+  window.addEventListener("resize", _redraw);
+  window.addEventListener("orientationchange", _redraw);
+  if (window.ResizeObserver) {
+    const _pc = $("perfChart");
+    if (_pc && _pc.parentElement) new ResizeObserver(_redraw).observe(_pc.parentElement);
+  }
+  document.querySelectorAll('.seg--perf button').forEach(b => {
+    b.addEventListener('click', () => {
+      document.querySelectorAll('.seg--perf button').forEach(x => x.classList.remove('active'));
+      b.classList.add('active');
+      drawChart();
+    });
+  });
 
   /* ---------- 15. Live BTC ticker ---------- */
   setInterval(() => {

@@ -242,6 +242,19 @@
 .link{color:var(--primary);text-decoration:none;cursor:pointer;background:none;border:0;font-family:inherit}
 .link:hover{text-decoration:underline}
 
+/* ===== Portfolio performance ===== */
+.panel--perf{display:flex;flex-direction:column;min-width:0}
+.perf__head{align-items:center;gap:16px;flex-wrap:wrap}
+.perf__title{min-width:0;display:flex;flex-direction:column;gap:2px}
+.perf__title h3{font-size:1.05rem;line-height:1.2}
+.perf__title p{display:inline-flex;align-items:center;gap:8px;margin:0}
+.perf__dot{width:8px;height:8px;border-radius:50%;background:var(--primary);box-shadow:0 0 0 4px rgba(34,230,184,.18);animation:perfPulse 1.8s ease-in-out infinite}
+@keyframes perfPulse{0%,100%{box-shadow:0 0 0 4px rgba(34,230,184,.18)}50%{box-shadow:0 0 0 7px rgba(34,230,184,.05)}}
+.seg--perf{flex-shrink:0}
+.seg--perf button{padding:7px 14px;font-weight:600;letter-spacing:.04em;transition:color .2s,background .2s}
+.perf-chart{position:relative;width:100%;min-width:0;height:clamp(200px,32vw,300px);margin-top:4px}
+.perf-chart canvas{display:block;width:100%;height:100%}
+
 /* ===== Responsive ===== */
 @media (max-width:1180px){
   .kpis,.hist-stats{grid-template-columns:repeat(2,1fr)}
@@ -272,6 +285,11 @@
   .kpi__value{font-size:1.25rem}
   .kpi__spark{width:90px;height:36px}
   .panel{padding:16px;border-radius:14px;margin-bottom:14px}
+  .perf__head{gap:10px;margin-bottom:12px}
+  .perf__title h3{font-size:.98rem}
+  .seg--perf{width:100%;justify-content:stretch}
+  .seg--perf button{flex:1;padding:8px 6px;font-size:.78rem}
+  .perf-chart{height:clamp(180px,46vw,240px)}
   .invest-hero__h{font-size:1.25rem}
   .invest-hero__stats{grid-template-columns:1fr}
   .steps{grid-template-columns:1fr 1fr}
@@ -296,4 +314,6 @@
   .topbar__title h1{font-size:1.05rem}
   .quote{grid-template-columns:1fr}
   .steps{grid-template-columns:1fr}
+  .perf-chart{height:200px}
+  .perf__title h3{font-size:.92rem}
 }

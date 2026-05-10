@@ -111,19 +111,24 @@
     </div>
 
     <div class="grid-2">
-      <div class="panel">
-        <div class="panel__head">
-          <div>
+      <div class="panel panel--perf">
+        <div class="panel__head perf__head">
+          <div class="perf__title">
             <h3>Portfolio performance</h3>
-            <p class="muted small">Live tracking</p>
+            <p class="muted small">
+              <span class="perf__dot" aria-hidden="true"></span>
+              Live tracking
+            </p>
           </div>
-          <div class="seg">
-            <button class="active" data-range="24h">24H</button>
-            <button data-range="7d">7D</button>
-            <button data-range="30d">30D</button>
+          <div class="seg seg--perf" role="tablist" aria-label="Chart range">
+            <button class="active" data-range="24h" role="tab">24H</button>
+            <button data-range="7d" role="tab">7D</button>
+            <button data-range="30d" role="tab">30D</button>
           </div>
         </div>
-        <canvas id="perfChart" height="220"></canvas>
+        <div class="perf-chart">
+          <canvas id="perfChart"></canvas>
+        </div>
       </div>
 
       <div class="panel">
